@@ -11,6 +11,7 @@ function User() {
     const params = useParams()
 
     useEffect(() => {
+<<<<<<< HEAD
         dispatch({ type: 'SET_LOADING' })
         const getUserData = async () => {
             const userData = await getUserAndRepos(params.login)
@@ -21,6 +22,11 @@ function User() {
         getUserData()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, params.login])
+=======
+        getUser(params.login)
+        getUserRepos(params.login)
+    }, [])
+>>>>>>> parent of 15062f5 (repo items)
 
     const {
         name,
