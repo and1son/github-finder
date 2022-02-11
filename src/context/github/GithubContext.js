@@ -33,26 +33,6 @@ export const GithubProvider = ({ children }) => {
             })
         } */
 
-    const searchUsers = async (text) => {
-        setLoading()
-
-        const params = new URLSearchParams({
-            q: text
-        })
-
-        const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
-            headers: {
-                Authorization: `token ${GITHUB_TOKEN}`,
-            },
-        })
-        console.log("response", response)
-        const { items } = await response.json()
-
-        dispatch({
-            type: 'GET_USERS',
-            payload: items,
-        })
-    }
 
     //get single user
     const getUser = async (login) => {
@@ -112,14 +92,11 @@ export const GithubProvider = ({ children }) => {
     return (
         <GithubContext.Provider
             value={{
-                users: state.users,
-                loading: state.loading,
-                searchUsers,
+                ...state,
+                dispatch,
                 clearUsers,
-                user: state.user,
                 getUser,
                 getUserRepos,
-                repos: state.repos
             }}
         >
             {children}
